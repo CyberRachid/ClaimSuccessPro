@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Use our free Claim Probability Calculator to estimate the likelihood of your insurance claim being approved. Global, responsive, and accurate." />
+  <meta name="keywords" content="claim approval calculator, insurance claim estimator, insurance tools, claim success prediction, global insurance help" />
+  <meta name="author" content="ClaimAdvisor.ai" />
+  <meta property="og:title" content="Claim Probability Calculator" />
+  <meta property="og:description" content="Estimate the likelihood of your insurance claim being approved with this free, easy-to-use tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourgithub.io/claim-probability-calculator/" />
+  <title>Claim Probability Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ebf4ff, #fff);
+      color: #1f2937;
+    }
+    .container {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #1e40af;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+      color: #374151;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: #f9fafb;
+    }
+    button {
+      margin-top: 2rem;
+      background-color: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e3a8a;
+    }
+    .result {
+      margin-top: 2rem;
+      background-color: #f0fdf4;
+      border-left: 5px solid #10b981;
+      padding: 1.2rem;
+      border-radius: 8px;
+    }
+    .adsense {
+      margin: 2rem 0;
+      text-align: center;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Claim Probability Calculator</h1>
+
+    <label for="type">Type of Claim</label>
+    <select id="type">
+      <option value="health">Health Insurance</option>
+      <option value="auto">Auto Insurance</option>
+      <option value="home">Home Insurance</option>
+      <option value="travel">Travel Insurance</option>
+      <option value="life">Life Insurance</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="region">Your Country or Region</label>
+    <input type="text" id="region" placeholder="e.g. United States" />
+
+    <label for="age">Your Age Group</label>
+    <select id="age">
+      <option value="under25">Under 25</option>
+      <option value="25to40">25–40</option>
+      <option value="41to60">41–60</option>
+      <option value="over60">Over 60</option>
+    </select>
+
+    <label for="amount">Claim Amount</label>
+    <input type="number" id="amount" placeholder="e.g. 10000" />
+
+    <label for="currency">Select Currency</label>
+    <select id="currency">
+      <option value="USD">USD ($)</option>
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="INR">INR (₹)</option>
+      <option value="AUD">AUD (A$)</option>
+      <option value="CAD">CAD (C$)</option>
+      <option value="JPY">JPY (¥)</option>
+    </select>
+
+    <label for="docs">Are You Submitting Full Documentation?</label>
+    <select id="docs">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label for="history">Do You Have Prior Claims?</label>
+    <select id="history">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <label for="reason">Reason for Claim</label>
+    <select id="reason">
+      <option value="accident">Accident</option>
+      <option value="illness">Illness</option>
+      <option value="theft">Theft</option>
+      <option value="disaster">Natural Disaster</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="duration">Policy Duration (Years)</label>
+    <input type="number" id="duration" placeholder="e.g. 3" />
+
+    <button onclick="calculate()">Calculate My Probability</button>
+
+    <div class="adsense">
+      <!-- AdSense Placeholder -->
+      <p>[Ad Placeholder]</p>
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const type = document.getElementById("type").value;
+      const age = document.getElementById("age").value;
+      const amount = parseInt(document.getElementById("amount").value);
+      const docs = document.getElementById("docs").value;
+      const history = document.getElementById("history").value;
+      const reason = document.getElementById("reason").value;
+      const duration = parseInt(document.getElementById("duration").value);
+      const currency = document.getElementById("currency").value;
+
+      let score = 50;
+      let reasons = [];
+
+      if (docs === "yes") { score += 15; reasons.push("You are submitting full documentation."); }
+      else { score -= 10; reasons.push("Missing documentation reduces your credibility."); }
+
+      if (history === "no") { score += 10; reasons.push("No prior claims indicates low risk."); }
+      else { score -= 10; reasons.push("Prior claims may signal higher risk to providers."); }
+
+      if (amount < 5000) { score += 10; reasons.push("Claim amount is modest."); }
+      else if (amount > 20000) { score -= 5; reasons.push("High amount claims require more scrutiny."); }
+
+      if (duration >= 2) { score += 5; reasons.push("Long policy duration builds trust."); }
+
+      if (["accident", "illness"].includes(reason)) {
+        score += 5; reasons.push("Reason is commonly accepted by insurers.");
+      } else {
+        score -= 5; reasons.push("Reason may be less supported without strong evidence.");
+      }
+
+      if (score > 95) score = 95;
+      if (score < 10) score = 10;
+
+      const suggestions = [
+        "Ensure you submit all required documents, including receipts and proof of loss.",
+        "Provide clear, concise descriptions and timelines in your claim.",
+        "Contact your insurer immediately after the incident.",
+        "Maintain communication and follow up on the status regularly.",
+        "Review your policy to ensure your claim type is covered."
+      ];
+
+      const summary = `You selected a ${type} claim in ${currency}. Based on your details, we estimate your chance of approval as follows:`;
+
+      const output = document.getElementById("output");
+      output.innerHTML = `
+        <div class="result">
+          <h3>Estimated Approval Probability: ${score}%</h3>
+          <p><strong>Summary:</strong> ${summary}</p>
+          <p><strong>Why This Score?</strong></p>
+          <ul>${reasons.map(r => `<li>${r}</li>`).join('')}</ul>
+          <p><strong>How to Improve:</strong></p>
+          <ul>${suggestions.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
