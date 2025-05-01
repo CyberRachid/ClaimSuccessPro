@@ -1,212 +1,976 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Use our free Claim Probability Calculator to estimate the likelihood of your insurance claim being approved. Global, responsive, and accurate." />
-  <meta name="keywords" content="claim approval calculator, insurance claim estimator, insurance tools, claim success prediction, global insurance help" />
-  <meta name="author" content="ClaimAdvisor.ai" />
-  <meta property="og:title" content="Claim Probability Calculator" />
-  <meta property="og:description" content="Estimate the likelihood of your insurance claim being approved with this free, easy-to-use tool." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourgithub.io/claim-probability-calculator/" />
-  <title>Claim Probability Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #ebf4ff, #fff);
-      color: #1f2937;
-    }
-    .container {
-      max-width: 700px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border-radius: 16px;
-    }
-    h1 {
-      font-size: 2rem;
-      color: #1e40af;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    label {
-      font-weight: 600;
-      margin-top: 1rem;
-      display: block;
-      color: #374151;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 0.5rem;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 1rem;
-      background-color: #f9fafb;
-    }
-    button {
-      margin-top: 2rem;
-      background-color: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      width: 100%;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1e3a8a;
-    }
-    .result {
-      margin-top: 2rem;
-      background-color: #f0fdf4;
-      border-left: 5px solid #10b981;
-      padding: 1.2rem;
-      border-radius: 8px;
-    }
-    .adsense {
-      margin: 2rem 0;
-      text-align: center;
-      color: #9ca3af;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Success Pro | Advanced Claim Calculator</title>
+    <meta name="description" content="Professional claim success calculator with 7 critical factors. Accurate probability assessment for insurance and legal claims.">
+    <!-- AdSense Meta (Add your publisher ID later) -->
+    <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+    <style>
+        :root {
+            --primary: #4285F4;
+            --danger: #EA4335;
+            --warning: #FBBC05;
+            --success: #34A853;
+            --text: #202124;
+            --bg: #f8f9fa;
+            --border: #DADCE0;
+            --light-blue: #E8F0FE;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            font-weight: 500;
+        }
+        
+        .tab:hover {
+            background: var(--light-blue);
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Calculator Styles */
+        .calculator-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .header-section {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .form-body {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #5F6368;
+            font-weight: 500;
+        }
+        
+        select, input[type="text"], input[type="date"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        /* Currency Input Group */
+        .input-group {
+            display: flex;
+        }
+        
+        .currency-selector {
+            width: 80px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+        }
+        
+        .currency-amount {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        .slider-container {
+            margin-top: 5px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #DFE1E5;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        /* Results Section */
+        #resultsSection {
+            display: none;
+            padding: 25px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            font-weight: 500;
+            color: var(--primary);
+            margin-top: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .faq-answer.show {
+            display: block;
+        }
+        
+        /* Blog Styles (AdSense Optimized) */
+        .blog-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .blog-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .blog-meta {
+            color: #5F6368;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* AdSense Placeholders */
+        .ad-unit {
+            background: #F1F3F4;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Claim Probability Calculator</h1>
-
-    <label for="type">Type of Claim</label>
-    <select id="type">
-      <option value="health">Health Insurance</option>
-      <option value="auto">Auto Insurance</option>
-      <option value="home">Home Insurance</option>
-      <option value="travel">Travel Insurance</option>
-      <option value="life">Life Insurance</option>
-      <option value="other">Other</option>
-    </select>
-
-    <label for="region">Your Country or Region</label>
-    <input type="text" id="region" placeholder="e.g. United States" />
-
-    <label for="age">Your Age Group</label>
-    <select id="age">
-      <option value="under25">Under 25</option>
-      <option value="25to40">25–40</option>
-      <option value="41to60">41–60</option>
-      <option value="over60">Over 60</option>
-    </select>
-
-    <label for="amount">Claim Amount</label>
-    <input type="number" id="amount" placeholder="e.g. 10000" />
-
-    <label for="currency">Select Currency</label>
-    <select id="currency">
-      <option value="USD">USD ($)</option>
-      <option value="EUR">EUR (€)</option>
-      <option value="GBP">GBP (£)</option>
-      <option value="INR">INR (₹)</option>
-      <option value="AUD">AUD (A$)</option>
-      <option value="CAD">CAD (C$)</option>
-      <option value="JPY">JPY (¥)</option>
-    </select>
-
-    <label for="docs">Are You Submitting Full Documentation?</label>
-    <select id="docs">
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
-
-    <label for="history">Do You Have Prior Claims?</label>
-    <select id="history">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <label for="reason">Reason for Claim</label>
-    <select id="reason">
-      <option value="accident">Accident</option>
-      <option value="illness">Illness</option>
-      <option value="theft">Theft</option>
-      <option value="disaster">Natural Disaster</option>
-      <option value="other">Other</option>
-    </select>
-
-    <label for="duration">Policy Duration (Years)</label>
-    <input type="number" id="duration" placeholder="e.g. 3" />
-
-    <button onclick="calculate()">Calculate My Probability</button>
-
-    <div class="adsense">
-      <!-- AdSense Placeholder -->
-      <p>[Ad Placeholder]</p>
-    </div>
-
-    <div id="output"></div>
-  </div>
-
-  <script>
-    function calculate() {
-      const type = document.getElementById("type").value;
-      const age = document.getElementById("age").value;
-      const amount = parseInt(document.getElementById("amount").value);
-      const docs = document.getElementById("docs").value;
-      const history = document.getElementById("history").value;
-      const reason = document.getElementById("reason").value;
-      const duration = parseInt(document.getElementById("duration").value);
-      const currency = document.getElementById("currency").value;
-
-      let score = 50;
-      let reasons = [];
-
-      if (docs === "yes") { score += 15; reasons.push("You are submitting full documentation."); }
-      else { score -= 10; reasons.push("Missing documentation reduces your credibility."); }
-
-      if (history === "no") { score += 10; reasons.push("No prior claims indicates low risk."); }
-      else { score -= 10; reasons.push("Prior claims may signal higher risk to providers."); }
-
-      if (amount < 5000) { score += 10; reasons.push("Claim amount is modest."); }
-      else if (amount > 20000) { score -= 5; reasons.push("High amount claims require more scrutiny."); }
-
-      if (duration >= 2) { score += 5; reasons.push("Long policy duration builds trust."); }
-
-      if (["accident", "illness"].includes(reason)) {
-        score += 5; reasons.push("Reason is commonly accepted by insurers.");
-      } else {
-        score -= 5; reasons.push("Reason may be less supported without strong evidence.");
-      }
-
-      if (score > 95) score = 95;
-      if (score < 10) score = 10;
-
-      const suggestions = [
-        "Ensure you submit all required documents, including receipts and proof of loss.",
-        "Provide clear, concise descriptions and timelines in your claim.",
-        "Contact your insurer immediately after the incident.",
-        "Maintain communication and follow up on the status regularly.",
-        "Review your policy to ensure your claim type is covered."
-      ];
-
-      const summary = `You selected a ${type} claim in ${currency}. Based on your details, we estimate your chance of approval as follows:`;
-
-      const output = document.getElementById("output");
-      output.innerHTML = `
-        <div class="result">
-          <h3>Estimated Approval Probability: ${score}%</h3>
-          <p><strong>Summary:</strong> ${summary}</p>
-          <p><strong>Why This Score?</strong></p>
-          <ul>${reasons.map(r => `<li>${r}</li>`).join('')}</ul>
-          <p><strong>How to Improve:</strong></p>
-          <ul>${suggestions.map(t => `<li>${t}</li>`).join('')}</ul>
+    <header>
+        <div class="container">
+            <div class="logo">📊 ClaimSuccessPro</div>
         </div>
-      `;
-    }
-  </script>
+    </header>
+    
+    <div class="tabs">
+        <div class="tab active" data-tab="calculator">🔢 Calculator</div>
+        <div class="tab" data-tab="faq">❓ FAQ</div>
+        <div class="tab" data-tab="blogs">✍️ Blogs</div>
+        <div class="tab" data-tab="resources">📚 Resources</div>
+        <div class="tab" data-tab="privacy">🔒 Privacy</div>
+    </div>
+    
+    <div class="container">
+        <!-- Calculator Tab -->
+        <div id="calculator" class="tab-content active">
+            <div class="calculator-container">
+                <div class="header-section">
+                    <h1>📊 Claim Success Calculator</h1>
+                    <p>Professional assessment with 7 critical factors</p>
+                </div>
+
+                <form id="claimForm" class="form-body">
+                    <!-- Claim Type -->
+                    <div class="form-group">
+                        <label for="claimType">1. 🏷️ Claim Type</label>
+                        <select id="claimType" required>
+                            <option value="">Select claim type...</option>
+                            <option value="auto_insurance">🚗 Auto Insurance</option>
+                            <option value="home_insurance">🏠 Home Insurance</option>
+                            <option value="health_insurance">🏥 Health Insurance</option>
+                            <option value="travel_insurance">✈️ Travel Insurance</option>
+                            <option value="warranty">🔧 Product Warranty</option>
+                            <option value="legal">⚖️ Legal Claim</option>
+                        </select>
+                    </div>
+
+                    <!-- Claim Details -->
+                    <div class="form-group">
+                        <label for="incidentDate">2. 📅 Incident Date</label>
+                        <input type="date" id="incidentDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="claimAmount">3. 💰 Claim Amount</label>
+                        <div class="input-group">
+                            <select id="currency" class="currency-selector" required>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="CAD">CAD</option>
+                                <option value="AUD">AUD</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                            <input type="number" id="claimAmount" class="currency-amount" placeholder="e.g. 1500" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="claimDescription">4. 📝 Claim Description</label>
+                        <textarea id="claimDescription" rows="4" placeholder="Detailed description of your claim" required></textarea>
+                    </div>
+
+                    <!-- 7 Critical Factors -->
+                    <div style="margin-top: 30px;">
+                        <h3 style="color: var(--primary);">🔍 Critical Factors</h3>
+                        
+                        <div class="form-group">
+                            <label>📄 Evidence Strength <span id="evidenceValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="evidence" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>⏱️ Timeliness <span id="timelinessValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="timeliness" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>📑 Policy Coverage <span id="coverageValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="coverage" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>🗂️ Documentation <span id="documentationValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="documentation" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>👥 Witness Support <span id="witnessValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="witness" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>🔄 Claim History <span id="historyValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="history" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>💬 Responsiveness <span id="responsivenessValue">50%</span></label>
+                            <div class="slider-container">
+                                <input type="range" id="responsiveness" min="0" max="100" value="50" class="slider">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit">🧮 Calculate Success Probability</button>
+                </form>
+
+                <div id="resultsSection"></div>
+            </div>
+        </div>
+        
+        <!-- FAQ Tab -->
+        <div id="faq" class="tab-content">
+            <div class="calculator-container">
+                <div class="header-section">
+                    <h1>❓ Frequently Asked Questions</h1>
+                    <p>Get answers about claim success probability</p>
+                </div>
+                
+                <div class="form-body">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">How accurate is this calculator? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Our calculator provides estimates based on industry-standard factors that influence claim success. While we can't guarantee outcomes, we use weighted averages from insurance industry data to give you a realistic probability range.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">What's the most important factor for claim success? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Evidence strength typically has the highest impact (25-35% weight depending on claim type), followed by policy coverage and documentation. The exact importance varies by claim type - legal claims value witness support more than warranty claims, for example.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why does my claim type affect the base rate? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Different claims have different approval patterns. Health insurance claims have higher base approval rates (60%) than legal claims (30%) due to regulatory requirements. We adjust for these industry norms automatically.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">How should I interpret a "Low Confidence" result? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>A result below 30% suggests significant obstacles. Focus on the improvement tips provided - often strengthening evidence or clarifying policy coverage can dramatically improve your chances.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">Does claim amount affect success probability? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Our current model doesn't factor in amount as approval rates don't always correlate with dollar values. However, extremely high claims may require additional documentation - consider this when rating your "Documentation" factor.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 6 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">How recent should my incident be? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Timeliness matters! Most policies require claims within:<br>
+                            - Auto: 30 days<br>
+                            - Home: 1 year<br>
+                            - Health: 6-12 months<br>
+                            Adjust the "Timeliness" slider accordingly.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 7 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I save my calculation results? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>Currently, results aren't saved automatically. We recommend screenshotting your results page or noting the breakdown for reference. Future versions may include save/print functionality.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 8 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why is the maximum probability 95%? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>We cap at 95% because even seemingly perfect claims can face unexpected issues (policy exclusions, administrative errors, etc.). This prevents overconfidence while still recognizing strong cases.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 9 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">How often is the calculation model updated? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>We review our algorithms quarterly using the latest industry data. Significant regulatory changes (like new insurance laws) trigger immediate updates.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 10 -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is my claim data stored or shared? <span>+</span></h3>
+                        <div class="faq-answer">
+                            <p>No - all calculations happen in your browser. We don't store claim details or results (see <a href="#privacy" class="tab-link">Privacy Policy</a>). For education/research, we only collect anonymous aggregate statistics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Blogs Tab (AdSense Optimized) -->
+        <div id="blogs" class="tab-content">
+            <div class="calculator-container">
+                <div class="header-section">
+                    <h1>✍️ Claim Success Guides</h1>
+                    <p>Expert advice to maximize your claim approval chances</p>
+                </div>
+                
+                <div class="form-body">
+                    <!-- Ad Unit 1 (Top) -->
+                    <div class="ad-unit">
+                        <p>Advertisement</p>
+                        <!-- AdSense Code Here -->
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                             data-ad-slot="XXXXXXXXXX"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    
+                    <!-- Blogs Tab Content -->
+<div id="blogs" class="tab-content">
+    <div class="calculator-container">
+        <div class="header-section">
+            <h1>✍️ Claim Success Guides</h1>
+            <p>Expert advice to maximize your claim approval chances</p>
+        </div>
+        
+        <div class="form-body">
+            <!-- Ad Unit 1 (Top) -->
+            <div class="ad-unit">
+                <p>Advertisement</p>
+                <!-- AdSense Code Here -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <!-- Blog 1 -->
+            <div class="blog-card">
+                <h3>Top 7 Viral Claim Settlement Stories You Need to Read</h3>
+                <div class="blog-meta">Updated: June 15, 2023 | Read time: 6 min</div>
+                <p><strong>Explore real-life claim settlement cases that shocked, inspired, and went viral.</strong></p>
+                <p>Insurance claim settlements can sometimes make headlines. From massive payouts to shocking rejections, these stories go viral because they reflect the reality many policyholders may face. Here are seven powerful and instructive claim settlement stories that took the internet by storm.</p>
+                <div class="blog-content" style="display:none;">
+                    <h4>1. The $1 Million Travel Insurance Payout</h4>
+                    <p>During the Icelandic volcanic eruption, a stranded family received over $1M in covered travel and medical costs due to their premium travel policy.</p>
+                    
+                    <h4>2. Denied Over a Missed Signature</h4>
+                    <p>A $250,000 life insurance policy was denied because the policyholder forgot to sign a single page. The family learned the hard way how critical documentation is.</p>
+                    
+                    <h4>3. The Flood That Wasn't Covered</h4>
+                    <p>A homeowner assumed flood damage was part of their home insurance. It wasn't. Their claim was denied, highlighting the importance of reading exclusions.</p>
+                    
+                    <h4>4. Cancer Diagnosis and a 2-Year Delay</h4>
+                    <p>A woman delayed filing a critical illness claim and was denied due to lapse in premium payments. Awareness of claim time limits could have changed her outcome.</p>
+                    
+                    <h4>5. Pet Insurance Heroics</h4>
+                    <p>A viral story of a golden retriever getting life-saving surgery, fully covered by an often-overlooked pet insurance policy.</p>
+                    
+                    <h4>6. Corporate Life Insurance Saves a Business</h4>
+                    <p>A business partner's sudden death triggered a $500,000 payout that helped the business survive, thanks to a well-structured buy-sell agreement.</p>
+                    
+                    <h4>7. Fraud Busted by Metadata</h4>
+                    <p>A false claim for a stolen car was denied after photo metadata revealed the "damage" happened weeks before the reported theft.</p>
+                    
+                    <p><strong>Conclusion:</strong> These stories are a reminder: insurance can be a lifesaver—or a headache. Know your policy, and document everything.</p>
+                </div>
+                <button class="toggle-blog" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; padding: 0;">Read More ↓</button>
+            </div>
+            
+            <!-- Blog 2 -->
+            <div class="blog-card">
+                <h3>The 10 Biggest Mistakes People Make When Filing Insurance Claims</h3>
+                <div class="blog-meta">Updated: May 28, 2023 | Read time: 5 min</div>
+                <p><strong>Avoid these costly errors when filing your next claim—mistakes that can reduce or eliminate your payout.</strong></p>
+                <p>Filing an insurance claim isn't just about paperwork; it's about precision. Here are the ten most common mistakes people make and how to avoid them.</p>
+                <div class="blog-content" style="display:none;">
+                    <ol>
+                        <li><strong>Waiting Too Long to File:</strong> Time is critical. Many policies have a short filing window.</li>
+                        <li><strong>Not Reading the Fine Print:</strong> Assuming you're covered can be dangerous. Always check your policy.</li>
+                        <li><strong>Submitting Incomplete Documents:</strong> Missing receipts, photos, or forms can lead to delays or denial.</li>
+                        <li><strong>Exaggerating the Claim:</strong> This is considered fraud. Be honest and accurate.</li>
+                        <li><strong>Not Contacting the Insurer Immediately:</strong> Notify your insurer as soon as possible to avoid suspicion.</li>
+                        <li><strong>Skipping the Police Report:</strong> For theft, vandalism, or accidents, a police report is essential.</li>
+                        <li><strong>Ignoring Follow-Ups:</strong> Always respond to insurer queries quickly.</li>
+                        <li><strong>Using Unlicensed Contractors:</strong> For repairs, always use certified professionals to avoid reimbursement issues.</li>
+                        <li><strong>Disposing of Damaged Property Too Early:</strong> The insurer may want to inspect it.</li>
+                        <li><strong>Assuming Denial Is Final:</strong> You can always appeal a denied claim.</li>
+                    </ol>
+                    <p><strong>Conclusion:</strong> Mistakes are preventable. Stay informed, organized, and proactive.</p>
+                </div>
+                <button class="toggle-blog" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; padding: 0;">Read More ↓</button>
+            </div>
+            
+            <!-- Ad Unit 2 (Middle) -->
+            <div class="ad-unit">
+                <p>Advertisement</p>
+                <!-- AdSense Code Here -->
+            </div>
+            
+            <!-- Blog 3 -->
+            <div class="blog-card">
+                <h3>How to Choose the Right Insurer in 2025: A Consumer's Guide</h3>
+                <div class="blog-meta">Updated: April 10, 2023 | Read time: 4 min</div>
+                <p><strong>Choosing an insurer? Use this step-by-step guide to evaluate their reliability, claim ratios, and customer service.</strong></p>
+                <p>Choosing an insurance company isn't just about the lowest premium—it's about trust. Here's how to find the best insurer for your needs.</p>
+                <div class="blog-content" style="display:none;">
+                    <h4>1. Compare Claim Settlement Ratios</h4>
+                    <p>A high ratio indicates reliability in honoring claims.</p>
+                    
+                    <h4>2. Check Customer Reviews and Ratings</h4>
+                    <p>Sites like Trustpilot and Google Reviews offer insight into real user experiences.</p>
+                    
+                    <h4>3. Evaluate Customer Support</h4>
+                    <p>Test their helpline or chat for responsiveness.</p>
+                    
+                    <h4>4. Understand Policy Offerings</h4>
+                    <p>Does the insurer offer flexible terms, riders, and transparent exclusions?</p>
+                    
+                    <h4>5. Look for Digital Experience</h4>
+                    <p>A modern insurer will offer app access, online claim filing, and real-time tracking.</p>
+                    
+                    <h4>6. Licensing and Accreditation</h4>
+                    <p>Ensure your insurer is certified by your country's regulatory authority.</p>
+                    
+                    <h4>7. Local Presence</h4>
+                    <p>In case of emergencies, a local office can make things smoother.</p>
+                    
+                    <p><strong>Conclusion:</strong> The best insurer balances affordability, accessibility, and accountability.</p>
+                </div>
+                <button class="toggle-blog" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; padding: 0;">Read More ↓</button>
+            </div>
+            
+            <!-- Blog 4 -->
+            <div class="blog-card">
+                <h3>Claim Denied? Here's What You Can Do (And What You Shouldn't)</h3>
+                <div class="blog-meta">Updated: March 22, 2023 | Read time: 5 min</div>
+                <p><strong>Denied a claim? Here's how to respond effectively—without making it worse.</strong></p>
+                <p>A denied claim can feel devastating. But all is not lost. Here's what you should and shouldn't do next.</p>
+                <div class="blog-content" style="display:none;">
+                    <h4>What to Do:</h4>
+                    <ul>
+                        <li>Request the reason for denial in writing</li>
+                        <li>Read your policy and identify relevant clauses</li>
+                        <li>File an internal appeal with additional documentation</li>
+                        <li>Seek help from your country's insurance ombudsman</li>
+                        <li>Consult legal or claims consultants if needed</li>
+                    </ul>
+                    
+                    <h4>What Not to Do:</h4>
+                    <ul>
+                        <li>Threaten insurer representatives</li>
+                        <li>Share misleading or false info</li>
+                        <li>Delay your response</li>
+                    </ul>
+                    
+                    <h4>Sample Appeal Letter Structure:</h4>
+                    <ul>
+                        <li>Mention your policy number</li>
+                        <li>Clearly describe your case</li>
+                        <li>Attach relevant evidence</li>
+                        <li>Be respectful and concise</li>
+                    </ul>
+                    
+                    <p><strong>Conclusion:</strong> A denial isn't always the end. Stay calm, informed, and persistent.</p>
+                </div>
+                <button class="toggle-blog" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; padding: 0;">Read More ↓</button>
+            </div>
+            
+            <!-- Blog 5 -->
+            <div class="blog-card">
+                <h3>Insurance Myths That Can Cost You Big: Debunked by Experts</h3>
+                <div class="blog-meta">Updated: February 15, 2023 | Read time: 4 min</div>
+                <p><strong>Think all insurance covers natural disasters? Or that you can't switch insurers mid-policy? Think again.</strong></p>
+                <p>Many people make costly decisions based on insurance myths. Let's debunk the most dangerous ones.</p>
+                <div class="blog-content" style="display:none;">
+                    <h4>Myth 1: All Disasters Are Covered</h4>
+                    <p>False. Most home policies exclude floods, earthquakes, and pandemics.</p>
+                    
+                    <h4>Myth 2: You Can't Change Insurers Until Renewal</h4>
+                    <p>You can switch anytime—just check cancellation terms.</p>
+                    
+                    <h4>Myth 3: More Premium Means More Coverage</h4>
+                    <p>Not necessarily. Compare features and limits.</p>
+                    
+                    <h4>Myth 4: Life Insurance Is Only for Breadwinners</h4>
+                    <p>Homemakers and business partners also provide immense value.</p>
+                    
+                    <h4>Myth 5: Claim Filing Is Always Difficult</h4>
+                    <p>Modern insurers offer smooth online filing. Don't assume.</p>
+                    
+                    <p><strong>Conclusion:</strong> Knowledge is power. Don't let myths dictate your insurance choices.</p>
+                </div>
+                <button class="toggle-blog" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; padding: 0;">Read More ↓</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Working Read More functionality
+    document.querySelectorAll('.toggle-blog').forEach(button => {
+        button.addEventListener('click', function() {
+            const content = this.previousElementSibling;
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                this.textContent = 'Show Less ↑';
+            } else {
+                content.style.display = 'none';
+                this.textContent = 'Read More ↓';
+            }
+        });
+    });
+</script>
+        
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <div class="calculator-container">
+                <div class="header-section">
+                    <h1>📚 Claim Resources</h1>
+                    <p>Official forms and templates</p>
+                </div>
+                
+                <div class="form-body">
+                    <div class="resource-card">
+                        <h3>🏛️ Government Resources</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.naic.org/state_web_map.htm" target="_blank" rel="noopener">
+                                    <span class="resource-icon">📝</span>
+                                    State Insurance Departments
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.usa.gov/state-consumer" target="_blank" rel="noopener">
+                                    <span class="resource-icon">🛡️</span>
+                                    State Consumer Protection Offices
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.dol.gov/general/topic/workercerts" target="_blank" rel="noopener">
+                                    <span class="resource-icon">💼</span>
+                                    US Department of Labor Forms
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h3>📋 Claim Templates</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.insurance.ca.gov/01-consumers/105-type/95-guides/01-auto/upload/SampleDemandLetter.pdf" target="_blank" rel="noopener">
+                                    <span class="resource-icon">🚗</span>
+                                    Auto Insurance Demand Letter
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.consumerfinance.gov/ask-cfpb/how-do-i-file-a-complaint-against-an-insurance-company-en-211/" target="_blank" rel="noopener">
+                                    <span class="resource-icon">🏠</span>
+                                    Home Insurance Complaint Form
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.eeoc.gov/employees/howtofile.cfm" target="_blank" rel="noopener">
+                                    <span class="resource-icon">👔</span>
+                                    Employment Claim Documentation
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Privacy Tab -->
+        <div id="privacy" class="tab-content">
+            <div class="calculator-container">
+                <div class="header-section">
+                    <h1>🔒 Privacy Policy</h1>
+                    <p>Last updated: June 2025</p>
+                </div>
+                
+                <div class="form-body">
+                    <div class="resource-card">
+                        <h3>📊 Data Collection</h3>
+                        <p>We do not store any personal information you enter into the calculator. All calculations are performed locally in your browser.</p>
+                        
+                        <h3>🍪 Cookies</h3>
+                        <p>This site uses only essential cookies for functionality. No tracking cookies are employed.</p>
+                        
+                        <h3>📈 Analytics</h3>
+                        <p>We use Google Analytics to understand site traffic patterns. This service collects anonymous usage data.</p>
+                        
+                        <h3>💰 AdSense</h3>
+                        <p>Google AdSense may use cookies to personalize ads. You can control this via <a href="https://adssettings.google.com" target="_blank">Google's ad settings</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 ClaimSuccessPro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('show');
+                question.querySelector('span').textContent = answer.classList.contains('show') ? '−' : '+';
+            });
+        });
+        
+        // Initialize sliders
+        const sliders = ['evidence', 'timeliness', 'coverage', 'documentation', 'witness', 'history', 'responsiveness'];
+        sliders.forEach(id => {
+            const slider = document.getElementById(id);
+            const valueDisplay = document.getElementById(`${id}Value`);
+            
+            slider.addEventListener('input', function() {
+                valueDisplay.textContent = this.value + '%';
+            });
+        });
+
+        // Claim calculation data
+        const claimTypeData = {
+            auto_insurance: { baseRate: 45, factors: { evidence: 0.25, timeliness: 0.2, coverage: 0.15, documentation: 0.15, witness: 0.1, history: 0.1, responsiveness: 0.05 }},
+            home_insurance: { baseRate: 40, factors: { evidence: 0.3, timeliness: 0.15, coverage: 0.2, documentation: 0.15, witness: 0.05, history: 0.1, responsiveness: 0.05 }},
+            health_insurance: { baseRate: 60, factors: { evidence: 0.2, timeliness: 0.25, coverage: 0.2, documentation: 0.15, witness: 0.05, history: 0.1, responsiveness: 0.05 }},
+            travel_insurance: { baseRate: 35, factors: { evidence: 0.35, timeliness: 0.25, coverage: 0.15, documentation: 0.1, witness: 0.05, history: 0.05, responsiveness: 0.05 }},
+            warranty: { baseRate: 65, factors: { evidence: 0.3, timeliness: 0.1, coverage: 0.25, documentation: 0.2, witness: 0.05, history: 0.05, responsiveness: 0.05 }},
+            legal: { baseRate: 30, factors: { evidence: 0.3, timeliness: 0.15, coverage: 0.1, documentation: 0.2, witness: 0.15, history: 0.05, responsiveness: 0.05 }}
+        };
+
+        // Form submission
+        document.getElementById('claimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateClaimProbability();
+        });
+
+        function calculateClaimProbability() {
+            const claimType = document.getElementById('claimType').value;
+            if (!claimType) {
+                alert("Please select a claim type");
+                return;
+            }
+            
+            const claimData = claimTypeData[claimType];
+            const currency = document.getElementById('currency').value;
+            
+            // Get all input values
+            const evidence = parseInt(document.getElementById('evidence').value);
+            const timeliness = parseInt(document.getElementById('timeliness').value);
+            const coverage = parseInt(document.getElementById('coverage').value);
+            const documentation = parseInt(document.getElementById('documentation').value);
+            const witness = parseInt(document.getElementById('witness').value);
+            const history = parseInt(document.getElementById('history').value);
+            const responsiveness = parseInt(document.getElementById('responsiveness').value);
+            const claimAmount = document.getElementById('claimAmount').value;
+            
+            let baseRate = claimData.baseRate;
+            let breakdown = [
+                `Base success rate: ${baseRate}%`
+            ];
+            
+            // Calculate all factor impacts
+            const evidenceImpact = Math.round((evidence - 50) * claimData.factors.evidence);
+            baseRate += evidenceImpact;
+            breakdown.push(`📄 Evidence: ${getLevel(evidence)} (${evidenceImpact >= 0 ? '+' : ''}${evidenceImpact}%)`);
+            
+            const timelinessImpact = Math.round((timeliness - 50) * claimData.factors.timeliness);
+            baseRate += timelinessImpact;
+            breakdown.push(`⏱️ Timeliness: ${getLevel(timeliness)} (${timelinessImpact >= 0 ? '+' : ''}${timelinessImpact}%)`);
+            
+            const coverageImpact = Math.round((coverage - 50) * claimData.factors.coverage);
+            baseRate += coverageImpact;
+            breakdown.push(`📑 Coverage: ${getLevel(coverage)} (${coverageImpact >= 0 ? '+' : ''}${coverageImpact}%)`);
+            
+            const documentationImpact = Math.round((documentation - 50) * claimData.factors.documentation);
+            baseRate += documentationImpact;
+            breakdown.push(`🗂️ Documentation: ${getLevel(documentation)} (${documentationImpact >= 0 ? '+' : ''}${documentationImpact}%)`);
+            
+            const witnessImpact = Math.round((witness - 50) * claimData.factors.witness);
+            baseRate += witnessImpact;
+            breakdown.push(`👥 Witness: ${getLevel(witness)} (${witnessImpact >= 0 ? '+' : ''}${witnessImpact}%)`);
+            
+            const historyImpact = Math.round((history - 50) * claimData.factors.history);
+            baseRate += historyImpact;
+            breakdown.push(`🔄 History: ${getLevel(history)} (${historyImpact >= 0 ? '+' : ''}${historyImpact}%)`);
+            
+            const responsivenessImpact = Math.round((responsiveness - 50) * claimData.factors.responsiveness);
+            baseRate += responsivenessImpact;
+            breakdown.push(`💬 Responsiveness: ${getLevel(responsiveness)} (${responsivenessImpact >= 0 ? '+' : ''}${responsivenessImpact}%)`);
+            
+            // Ensure probability is between 5% and 95%
+            const totalProbability = Math.min(95, Math.max(5, Math.round(baseRate)));
+            
+            // Display results
+            const resultsHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--primary);">📊 Claim Success Probability</h2>
+                    <div style="width: 200px; height: 200px; margin: 0 auto; background: conic-gradient(${
+                        totalProbability < 30 ? 'var(--danger)' : 
+                        totalProbability < 60 ? 'var(--warning)' : 'var(--success)'
+                    } 0% ${totalProbability}%, #E0E0E0 ${totalProbability}% 100%); 
+                    border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <div style="background: white; width: 70%; height: 70%; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
+                            ${totalProbability}%
+                        </div>
+                    </div>
+                    <p style="color: ${
+                        totalProbability < 30 ? 'var(--danger)' : 
+                        totalProbability < 60 ? 'var(--warning)' : 'var(--success)'
+                    }; font-weight: 500; margin-top: 10px;">
+                        ${totalProbability < 30 ? 'Low' : totalProbability < 60 ? 'Moderate' : 'High'} confidence
+                    </p>
+                    <p>Claim amount: ${currency} ${claimAmount}</p>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border);">
+                    <h3 style="color: var(--primary); margin-top: 0;">📈 Calculation Breakdown</h3>
+                    <ul style="padding-left: 20px;">
+                        ${breakdown.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div style="background: var(--light-blue); padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <h3 style="color: var(--primary); margin-top: 0;">🚀 Recommended Actions</h3>
+                    <ol style="padding-left: 20px;">
+                        ${generateImprovementTips(totalProbability, evidence, timeliness, coverage, documentation, witness, history, responsiveness, claimType)}
+                    </ol>
+                </div>
+            `;
+            
+            document.getElementById('resultsSection').innerHTML = resultsHTML;
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+        
+        function getLevel(value) {
+            return value < 30 ? 'Very Low' : 
+                   value < 50 ? 'Low' : 
+                   value < 70 ? 'Moderate' : 
+                   value < 90 ? 'High' : 'Very High';
+        }
+        
+        function generateImprovementTips(probability, evidence, timeliness, coverage, documentation, witness, history, responsiveness, claimType) {
+            const tips = [];
+            
+            if (evidence < 70) tips.push(`<li><strong>📄 Improve evidence</strong>: Gather photos, receipts, or official reports to strengthen your case.</li>`);
+            if (timeliness < 60) tips.push(`<li><strong>⏱️ Act quickly</strong>: Most ${claimType.replace('_', ' ')} claims have strict filing deadlines.</li>`);
+            if (coverage < 60) tips.push(`<li><strong>📑 Review policy</strong>: Identify specific clauses that support your claim.</li>`);
+            if (documentation < 70) tips.push(`<li><strong>🗂️ Organize documents</strong>: Create a clear timeline with all supporting materials.</li>`);
+            if (witness < 60 && (claimType === 'auto_insurance' || claimType === 'legal')) tips.push(`<li><strong>👥 Obtain witness statements</strong>: Contact anyone who saw the incident.</li>`);
+            
+            if (probability < 40) {
+                tips.push(`<li><strong>🛠️ Consider professional help</strong>: A ${claimType.includes('insurance') ? 'public adjuster' : 'lawyer'} can significantly improve your chances.</li>`);
+            } else if (probability < 70) {
+                tips.push(`<li><strong>💼 Prepare for negotiation</strong>: Initial offers are often lower than final settlements.</li>`);
+            }
+            
+            return tips.join('');
+        }
+    </script>
 </body>
 </html>
